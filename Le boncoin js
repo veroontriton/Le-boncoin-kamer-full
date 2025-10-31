@@ -1,0 +1,14 @@
+# MongoDB Atlas (gratuit)
+MONGO_URI=mongodb+srv://Veroontriton:Azertyxz1@leboncoinkamer.pnx6xxa.mongodb.net/lkamer?retryWrites=true&w=majority&appName=LEBONCOINKAMER
+
+# Sécurité
+JWT_SECRET=tritonsecret
+
+# Port
+PORT=5000
+
+# Stripe (mode test – gratuit)
+STRIPE_SECRET_KEY=sk_test_51xxxxxxxxxxxxxxxxx
+
+# Paysika (mode sandbox – gratuit)
+PAYSIKA_API_KEY=test_key_xxxxxxxx
