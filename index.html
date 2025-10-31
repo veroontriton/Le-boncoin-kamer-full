@@ -1,0 +1,138 @@
+<body data-theme="light">
+
+<!-- ========= LOGO GÉNÉRÉ (SVG) ========= -->
+<div id="landingPage" class="page" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;height:100vh;background:var(--card);">
+  <!-- LOGO SVG (clicable) -->
+  <svg id="logoSvg" width="120" height="120" viewBox="0 0 120 120" style="cursor:pointer;" onclick="playLogoAnim()">
+    <circle cx="60" cy="60" r="55" fill="url(#grad1)" stroke="#fff" stroke-width="4"/>
+    <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#fff" font-size="50" font-weight="bold">LK</text>
+    <defs>
+      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#0b74de"/>
+        <stop offset="100%" stop-color="#e83e8c"/>
+      </linearGradient>
+    </defs>
+  </svg>
+  <h1 style="margin-top:12px;">LeBoncoin Kamer</h1>
+  <p class="small">Marché & Réseau social certifiés – Cameroun</p>
+
+  <!-- BOUTONS -->
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;width:100%;max-width:320px;">
+    <button class="btn" onclick="showAuth('register')">Créer un compte</button>
+    <button class="btn ghost" onclick="showAuth('login')">J’ai déjà un compte</button>
+  </div>
+  <div style="margin-top:32px;font-size:12px;color:var(--muted);">
+    Âge minimum : 12 ans – Identité vérifiée – CGU & confidentialité appliquées
+  </div>
+</div>
+
+<!-- ANIMATION DU LOGO (petit effet) -->
+<script>
+  function playLogoAnim(){
+    const logo = document.getElementById('logoSvg');
+    logo.style.transition='transform .4s';logo.style.transform='scale(1.15) rotate(5deg)';
+    setTimeout(()=>{logo.style.transform='scale(1) rotate(0)'},400);
+  }
+</script>
+
+<!-- ========= MODAL AUTH (avec indicatifs) ========= -->
+<div id="authModal" class="modal-backdrop" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <h3 id="authTitle">Créer un compte</h3>
+      <button class="close-btn" onclick="closeModal('authModal')">✖</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+      <input id="authNom" class="input" placeholder="Nom(s)">
+      <input id="authPrenom" class="input" placeholder="Prénom(s)">
+      <input id="authDate" class="input" type="date" placeholder="Date de naissance">
+      <small>Âge minimum : 12 ans</small>
+
+      <!-- SÉLECTEUR PAYS + INDICATIF -->
+      <label style="font-size:12px;color:var(--muted);">Pays / indicatif</label>
+      <div style="display:flex;gap:6px;">
+        <select id="authIndicatif" class="input" style="flex:0 0 120px;" onchange="syncPlaceholder()">
+          <option value="+237">Cameroun (+237)</option>
+          <option value="+33">France (+33)</option>
+          <option value="+241">Gabon (+241)</option>
+          <option value="+242">Congo (+242)</option>
+          <option value="+243">RDC (+243)</option>
+          <option value="+244">Angola (+244)</option>
+          <option value="+229">Bénin (+229)</option>
+          <option value="+228">Togo (+228)</option>
+          <option value="+225">Côte d’Ivoire (+225)</option>
+          <option value="+221">Sénégal (+221)</option>
+          <option value="+224">Guinée (+224)</option>
+          <option value="+245">Guinée-Bissau (+245)</option>
+          <option value="+220">Gambie (+220)</option>
+          <option value="+223">Mali (+223)</option>
+          <option value="+226">Burkina (+226)</option>
+          <option value="+230">Maurice (+230)</option>
+          <option value="+232">Sierra Leone (+232)</option>
+          <option value="+231">Liberia (+231)</option>
+          <option value="+229">Niger (+227)</option>
+          <option value="+228">Togo (+228)</option>
+          <option value="+1">USA / Canada (+1)</option>
+          <option value="+44">Royaume-Uni (+44)</option>
+          <option value="+49">Allemagne (+49)</option>
+          <option value="+39">Italie (+39)</option>
+          <option value="+34">Espagne (+34)</option>
+          <option value="+55">Brésil (+55)</option>
+          <option value="+81">Japon (+81)</option>
+          <option value="+86">Chine (+86)</option>
+          <option value="+91">Inde (+91)</option>
+        </select>
+        <input id="authPhone" class="input" type="tel" placeholder="6 78 90 12 34">
+      </div>
+
+      <script>
+        function syncPlaceholder(){
+          const ind=document.getElementById('authIndicatif').value;
+          const ph=document.getElementById('authPhone');
+          if(ind==='+1')ph.placeholder='(201) 555-0123';
+          else if(ind==='+33')ph.placeholder='6 12 34 56 78';
+          else ph.placeholder='6 78 90 12 34';
+        }
+        syncPlaceholder();
+      </script>
+
+      <input id="authEmail" class="input" type="email" placeholder="E-mail (optionnel)">
+      <input id="authPwd" class="input" type="password" placeholder="Mot de passe (8 car. + symbole)">
+      <small>Ex : Bonjour@123</small>
+      <label><input type="checkbox" id="authMajeure"> Je certifie avoir 12 ans ou plus</label>
+      <label><input type="checkbox" id="authCGU"> J’accepte les CGU & la vérification d’identité</label>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" onclick="submitAuth()">Valider</button>
+        <button class="btn ghost" onclick="oauth('google')">Google</button>
+        <button class="btn ghost" onclick="oauth('facebook')">Facebook</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESTE DU CORP PRINCIPAL (déjà présent dans ton précédent code) -->
+  <header id="mainHeader" style="display:none;">...colle ici ton header existant...</header>
+  <main class="container" id="mainApp" style="display:none;">...colle ici ton main existant...</main>
+  <footer id="mainFooter" style="display:none;">...colle ici ton footer existant...</footer>
+  <!-- Tous les autres modaux déjà présents -->
+
+  <!-- SCRIPTS DEJA PRESENTS -->
+  <script>
+    /* ---------- Fonctions déjà écrites (garder les tiennes) ---------- */
+    function showAuth(mode){
+      $('authTitle').innerText = mode==='login' ? 'Se connecter' : 'Créer un compte';
+      openModal('authModal');
+    }
+    function submitAuth(){
+      /* même logique que avant + vérification indicatif */
+      const nom=$('authNom').value.trim(),prenom=$('authPrenom').value.trim(),date=$('authDate').value,phone=$('authIndicatif').value+$('authPhone').value,pwd=$('authPwd').value,majeure=$('authMajeure').checked,cgu=$('authCGU').checked;
+      if(!nom||!prenom||!date||!phone||!pwd||!majeure||!cgu)return alert('Tous les champs obligatoires');
+      if(!/[!@#$%^&*(),.?":{}|<>]/.test(pwd)||pwd.length<8)return alert('Mot de passe invalide (8 car.+symbole)');
+      const age=(new Date()-new Date(date))/(1000*60*60*24*365);if(age<12)return alert('Âge minimum : 12 ans');
+      STATE.currentUser={id:randomId(),nom,prenom,phone,email:$('authEmail').value.trim(),avatar:'https://i.pravatar.cc/150?u='+Date.now(),verified:false,pro:false};
+      saveState();closeModal('authModal');goTo('mainPage');addNotification('Bienvenue '+prenom+' !');toast('Compte créé (simu)')
+    }
+    function oauth(p){alert('OAuth '+p+' – serveur required')}
+    /* (copie ici le reste de tes fonctions : renderFeed, renderStories, messagerie, etc.) */
+  </script>
+</body>
+</html>
